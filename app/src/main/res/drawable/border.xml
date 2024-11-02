@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#9F9F92" /> <!-- Background color of the note -->
+    <stroke
+        android:width="2dp"
+        android:color="#3A1772" /> <!-- Border color -->
+    <corners android:radius="3dp" /> <!-- Same as card corner radius -->
+</shape>

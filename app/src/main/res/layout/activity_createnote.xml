@@ -21,7 +21,7 @@
             android:paddingRight="16dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#0A100D"
+            android:textColor="@color/white"
             android:hint="Enter your note title"
             android:id="@+id/createtitleofnote"/>
     </androidx.appcompat.widget.Toolbar>
@@ -35,7 +35,7 @@
         android:background="#6D6466"
         android:hint="Enter your note here"
         android:padding="15dp"
-        android:textColor="#0A100D"
+        android:textColor="@color/white"
         android:textSize="15sp" />
 
     <!-- Floating Action Button -->

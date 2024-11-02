@@ -38,20 +38,26 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.firestore)
+
+    // Add the Firebase BOM first
+    implementation(platform("com.google.firebase:firebase-bom:32.2.3")) // Use the latest BOM version
+
+    // Use the KTX versions of Firebase libraries
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Remove the older Firestore dependency, as it is managed by the BOM
+    // implementation(libs.firebase.firestore) // Remove this line
+
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2") // Check if this is compatible with the BOM version
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.material.v190)
-
-
-
-
 }
