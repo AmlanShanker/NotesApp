@@ -70,6 +70,15 @@ class notesactivity : AppCompatActivity() {
 
             override fun onBindViewHolder(holder: NoteViewHolder, position: Int, model: firebaseModel) {
                 holder.bind(model)
+
+                // Handle note click to open NoteDetailActivity
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(this@notesactivity, NoteDetailActivity::class.java)
+                    intent.putExtra("NOTE_ID", noteAdapter.snapshots.getSnapshot(position).id)
+                    intent.putExtra("NOTE_TITLE", model.title)
+                    intent.putExtra("NOTE_CONTENT", model.content)
+                    startActivity(intent)
+                }
             }
         }
 
