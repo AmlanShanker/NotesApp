@@ -37,7 +37,7 @@ class forgotpassword : AppCompatActivity() {
             if (mail.isEmpty()) {
                 Toast.makeText(applicationContext, "Enter your mail first", Toast.LENGTH_SHORT).show()
             } else {
-                // Code to send password recovery email
+
                 firebaseAuth.sendPasswordResetEmail(mail)
                     .addOnCompleteListener{ task ->
                         if (task.isSuccessful) {

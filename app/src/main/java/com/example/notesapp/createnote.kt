@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class createnote : AppCompatActivity() {
     private lateinit var mcreateTitleOfNote: EditText
@@ -17,7 +20,7 @@ class createnote : AppCompatActivity() {
     private lateinit var mSaveNote: FloatingActionButton
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
-    private var noteId: String? = null // To hold the note ID for editing
+    private var noteId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +37,10 @@ class createnote : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
 
-        // Check if there is a NOTE_ID passed to this activity
+
         noteId = intent.getStringExtra("NOTE_ID")
 
         if (!noteId.isNullOrEmpty()) {
-            // Load existing note details for editing
             loadNoteDetails(noteId!!)
         }
 
@@ -50,10 +52,8 @@ class createnote : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Both fields are required", Toast.LENGTH_SHORT).show()
             } else {
                 if (noteId != null) {
-                    // Update the existing note
                     updateNote(noteId!!, title, content)
                 } else {
-                    // Create a new note
                     createNewNote(title, content)
                 }
             }
@@ -82,16 +82,19 @@ class createnote : AppCompatActivity() {
         val documentReference = firebaseFirestore.collection("notes")
             .document(firebaseAuth.currentUser!!.uid)
             .collection("myNotes")
-            .document() // Generate a new document ID
+            .document()
+
+        val currentDateTime = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault()).format(Date())
 
         val note = hashMapOf(
             "title" to title,
-            "content" to content
+            "content" to content,
+            "timestamp" to currentDateTime
         )
 
         documentReference.set(note)
             .addOnSuccessListener {
-                Toast.makeText(this, "Note Created Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Note Created Successfully on $currentDateTime", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, notesactivity::class.java))
             }
             .addOnFailureListener { e: Exception ->
@@ -111,7 +114,8 @@ class createnote : AppCompatActivity() {
             .document(noteId)
             .set(note)
             .addOnSuccessListener {
-                Toast.makeText(this, "Note Updated Successfully", Toast.LENGTH_SHORT).show()
+                val currentDateTime = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault()).format(Date())
+                Toast.makeText(this, "Note Updated Successfully on $currentDateTime", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, notesactivity::class.java))
             }
             .addOnFailureListener { e: Exception ->

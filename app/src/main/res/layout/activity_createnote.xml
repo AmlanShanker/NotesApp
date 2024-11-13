@@ -12,7 +12,6 @@
         android:id="@+id/toolbarofcreatenote"
         android:background="#0A100D">
 
-        <!-- Title EditText inside the Toolbar -->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,7 +25,6 @@
             android:id="@+id/createtitleofnote"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Content EditText below the Toolbar -->
     <EditText
         android:id="@+id/createcontentofnote"
         android:layout_width="match_parent"
@@ -38,7 +36,6 @@
         android:textColor="@color/white"
         android:textSize="15sp" />
 
-    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             if (mail.isEmpty() || password.isEmpty()) {
                 Toast.makeText(applicationContext, "All Fields Are Required", Toast.LENGTH_SHORT).show()
             } else {
-                // Login the user
+              
                 firebaseAuth.signInWithEmailAndPassword(mail, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {

@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".signup"
     android:background="#f9f9f9">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/centerline2"
-        android:layout_centerInParent="true"
-        />
+        android:layout_centerInParent="true" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,24 +21,22 @@
         android:layout_marginRight="30dp"
         android:layout_above="@id/centerline2"
         android:layout_marginBottom="150dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello There !"
             android:textSize="42sp"
             android:textColor="#FFBD4D"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign In to Continue"
             android:textSize="23sp"
-            android:textColor="#FF8596"
-            />
+            android:textColor="#FF8596" />
     </LinearLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,17 +44,16 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/email"
         android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        >
+        android:layout_marginLeft="30dp">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/signupemail"
             android:hint="Enter Your Email"
             android:textColor="#0A100D"
-            android:inputType="textEmailAddress"
-            />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,13 +62,31 @@
         android:id="@+id/password"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        app:endIconMode="password_toggle"
-        >
+        app:endIconMode="password_toggle">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/signuppassword"
             android:hint="Enter Your Password"
+            android:inputType="textPassword"
+            android:textColor="#0A100D" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginTop="10dp"
+        android:id="@+id/confirmPassword"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        app:endIconMode="password_toggle">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signupConfirmPassword"
+            android:hint="Confirm Your Password"
             android:inputType="textPassword"
             android:textColor="#0A100D" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -82,9 +98,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/button_design"
-        android:layout_below="@id/password"
-        android:id="@+id/signup"
-        >
+        android:layout_below="@id/confirmPassword"
+        android:id="@+id/signup">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -94,9 +109,9 @@
             android:text="Sign Up"
             android:layout_centerInParent="true"
             android:textColor="@android:color/white"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="20dp" />
     </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,6 +122,5 @@
         android:textColor="#0A100D"
         android:layout_below="@+id/signup"
         android:id="@+id/gotologin"
-        android:layout_marginTop="70dp"
-        />
+        android:layout_marginTop="70dp" />
 </RelativeLayout>

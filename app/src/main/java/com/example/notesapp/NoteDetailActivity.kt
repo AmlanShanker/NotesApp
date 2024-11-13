@@ -2,20 +2,19 @@ package com.example.notesapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import android.widget.TextView
 
 class NoteDetailActivity : AppCompatActivity() {
-
     private lateinit var titleTextView: TextView
     private lateinit var contentTextView: TextView
-    private lateinit var editFab: FloatingActionButton
-    private lateinit var deleteFab: FloatingActionButton
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var noteId: String
@@ -26,19 +25,25 @@ class NoteDetailActivity : AppCompatActivity() {
 
         titleTextView = findViewById(R.id.note_title)
         contentTextView = findViewById(R.id.note_content)
-        editFab = findViewById(R.id.edit_fab)
-        deleteFab = findViewById(R.id.delete_fab)
+        val editFab: FloatingActionButton = findViewById(R.id.edit_fab)
+        val deleteFab: FloatingActionButton = findViewById(R.id.delete_fab)
+        val backArrow = findViewById<ImageView>(R.id.back_arrow)
 
-        // Initialize Firebase
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-
-        // Get the note ID and details from the intent
         noteId = intent.getStringExtra("NOTE_ID") ?: ""
         titleTextView.text = intent.getStringExtra("NOTE_TITLE")
         contentTextView.text = intent.getStringExtra("NOTE_CONTENT")
 
-        // Set up edit button click listener
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar_note_detail)
+        setSupportActionBar(toolbar)
+
+
+        backArrow.setOnClickListener {
+            navigateBackToNotesActivity()
+        }
+
         editFab.setOnClickListener {
             val intent = Intent(this, createnote::class.java)
             intent.putExtra("NOTE_ID", noteId)
@@ -47,10 +52,16 @@ class NoteDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Set up delete button click listener
-        deleteFab.setOnClickListener {
-            deleteNote()
-        }
+        deleteFab.setOnClickListener { confirmDeleteNote() }
+    }
+
+    private fun confirmDeleteNote() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Delete")
+            .setMessage("Are you sure you want to delete this note?")
+            .setPositiveButton("Yes") { _, _ -> deleteNote() }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     private fun deleteNote() {
@@ -61,13 +72,14 @@ class NoteDetailActivity : AppCompatActivity() {
             .delete()
             .addOnSuccessListener {
                 Toast.makeText(this, "Note Deleted Successfully", Toast.LENGTH_SHORT).show()
-                // Redirect to notesactivity
-                val intent = Intent(this, notesactivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Clear the back stack
-                startActivity(intent)
+                navigateBackToNotesActivity()
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to Delete Note", Toast.LENGTH_SHORT).show()
-            }
+            .addOnFailureListener { Toast.makeText(this, "Failed to Delete Note", Toast.LENGTH_SHORT).show() }
+    }
+
+    private fun navigateBackToNotesActivity() {
+        val intent = Intent(this, notesactivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

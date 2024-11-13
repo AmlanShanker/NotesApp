@@ -53,7 +53,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:text="This is your code which appear here"
+            android:text="The note will appear here"
             android:textSize="15sp"
             android:textColor="@color/white"/>
     </LinearLayout>
