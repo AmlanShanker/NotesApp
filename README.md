@@ -7,7 +7,10 @@ XML is used for the layout of the App.
 
 The aim of the  Firebase Email Verification during Sign Up,Forgot Password and for Storing the Data of Users and their Notes.
 
-Sign In                                                                                        Login
+Cloud Firestore
 
-![image](https://github.com/user-attachments/assets/b87177f4-f900-48d2-a765-eabac06e9074)      ![image](https://github.com/user-attachments/assets/102e438b-cc08-4485-839b-1154890abf72)
+![image](https://github.com/user-attachments/assets/2190b1cd-3c72-42f5-adfd-2a6b87b8e5f0)
 
+Firebase Authentication
+
+![image](https://github.com/user-attachments/assets/dd57926d-e9c6-4831-99d0-44852798be08)
